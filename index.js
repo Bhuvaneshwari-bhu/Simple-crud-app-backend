@@ -1,11 +1,17 @@
 //brain of backend
 const express = require('express')
 const app = express()
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
 
 const mongoose = require('mongoose')
 const Product = require('./models/productmodel')
 
 const productRoute = require("./routes/product.route.js")
+const authRoute = require("./routes/auth.route.js")
+
+
 
 //middleware
 app.use(express.json()) //middleware
@@ -14,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //routes
 app.use('/api/products', productRoute)
+app.use('/api/auth', authRoute)
 
 
 app.get('/', (req, res) => {
@@ -81,6 +88,9 @@ app.get('/', (req, res) => {
 //         res.status(500).json({ message: error.message })
 //     }
 // })
+
+//Authentication Routes
+//Register
 
 
 
